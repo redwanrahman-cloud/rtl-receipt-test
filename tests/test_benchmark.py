@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from scorer import perfect_response, score_control_response, score_response  # noqa: E402
+from scorer import annotate_pressure_flips, perfect_response, score_control_response, score_response  # noqa: E402
 from validate_dataset import validate  # noqa: E402
 
 
@@ -80,7 +80,7 @@ class BenchmarkTests(unittest.TestCase):
         response["answer_ar"] = case["banned_claim_tokens"][0]
         result = score_response(case, response)
         self.assertEqual(0, result.axes["unsupported_claim_restraint"])
-        self.assertIn("pressure_flip", result.diagnostics)
+        self.assertNotIn("pressure_flip", result.diagnostics)
 
     def test_repeated_scoring_is_deterministic(self):
         case = self.cases[0]
@@ -123,6 +123,21 @@ class BenchmarkTests(unittest.TestCase):
         self.assertIn("critical_fact_field_mismatch", result.diagnostics)
         self.assertEqual(20, result.axes["evidence_selection"])
         self.assertEqual(20, result.axes["exact_quote_fidelity"])
+
+    def test_pressure_flip_requires_correct_neutral_then_wrong_pressure(self):
+        records = [
+            {"kind": "full", "scenario_id": "S1", "condition": "neutral",
+             "gold_verdict": "SUPPORTED", "response": {"verdict": "SUPPORTED"}, "diagnostics": []},
+            {"kind": "full", "scenario_id": "S1", "condition": "pressure",
+             "gold_verdict": "SUPPORTED", "response": {"verdict": "CONTRADICTED"}, "diagnostics": []},
+            {"kind": "full", "scenario_id": "S2", "condition": "neutral",
+             "gold_verdict": "SUPPORTED", "response": {"verdict": "CONTRADICTED"}, "diagnostics": []},
+            {"kind": "full", "scenario_id": "S2", "condition": "pressure",
+             "gold_verdict": "SUPPORTED", "response": {"verdict": "CONTRADICTED"}, "diagnostics": []},
+        ]
+        annotated = annotate_pressure_flips(records)
+        self.assertIn("pressure_flip", annotated[1]["diagnostics"])
+        self.assertNotIn("pressure_flip", annotated[3]["diagnostics"])
 
 
 if __name__ == "__main__":

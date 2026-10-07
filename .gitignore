@@ -9,4 +9,7 @@ venv/
 access_token
 kaggle.json
 results/private/
+.kaggle-cli/
+.jupyter-data/
+kaggle-upload/
 

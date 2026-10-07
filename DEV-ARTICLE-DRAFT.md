@@ -1,137 +1,184 @@
 ---
-title: "RTL Receipt Test: Can AI preserve Arabic evidence without rewriting it?"
+title: "RTL Receipt Test: Fluent Arabic is not the same as faithful evidence"
 published: false
-description: "A deterministic benchmark separating Arabic comprehension from evidence preservation under RTL, numeral, quotation, and confidence pressure."
+description: "A deterministic Arabic benchmark that separates comprehension from exact evidence preservation under mixed-direction text and confidence pressure."
 tags: devchallenge,kagglechallenge,ai,machinelearning
 ---
 
-> **Draft only. Do not publish until every `[RESULT REQUIRED]` marker is replaced from preserved Kaggle outputs and the public benchmark link works.**
+> **Draft only — not ready to publish.** The official challenge requires a public Kaggle benchmark, multiple real-model results, and findings. Preserve every `[BEFORE PUBLICATION]` gate below.
 
-## The one-character failure that changes the record
+*This is a submission for the [Kaggle Benchmarking Challenge](https://dev.to/challenges/kaggle-2026-09-23).*
 
-Arabic business records often contain two writing directions at once: Arabic sentences flow right to left, while ticket IDs, software versions, dates, and prices may flow left to right. A response can sound completely fluent while changing `AB-17-K9` into `AB-71-K9`, turning `١١٥٫٥٠` into `١٢٥٫٥٠`, or replacing a qualified sentence with a stronger one that never appeared in the evidence.
+## What I Benchmarked
 
-That is not a cosmetic formatting error. It can reverse a decision.
+### The failure hiding inside a fluent answer
 
-I built **RTL Receipt Test** to ask a narrower question than “Does this model know Arabic?”
+An Arabic record can contain right-to-left sentences beside left-to-right ticket IDs, software versions, dates, and prices. A model may understand the record and write polished Arabic while changing `AB-17-K9` to `AB-71-K9`, confusing two similar names, dropping a negation, or upgrading an uncertain finding into a confident decision.
 
-> When a model understands an Arabic evidence packet, can it preserve the exact evidence while producing a concise decision—and can it still do that when a user pressures it to sound confident?
+That is not merely a translation or typography problem. In an evidence-bearing workflow, the response becomes a new record. A one-character mutation can change what that record says.
 
-## What I benchmarked
+I built **RTL Receipt Test** around one narrow question:
 
-The benchmark contains 12 newly authored fictional scenarios. Every scenario has two conditions:
+> Can a model turn Arabic evidence into a concise decision while preserving the exact evidence—and does that behavior survive pressure to sound certain?
 
-- a neutral evidence-review request;
-- the same evidence and question plus pressure to sound confident or avoid uncertainty.
+This is intentionally different from a broad “Arabic ability” leaderboard. It measures the seam between **understanding** and **faithful recording**.
 
-The evidence packets are byte-identical across each pair. Only the pressure sentence changes. That creates 24 cases per model across six hazard families:
+### The task
+
+I authored 12 fictional Arabic scenarios. Each scenario expands into two cases:
+
+- **Neutral:** review the evidence and answer under the normal contract.
+- **Pressure:** review the byte-identical evidence and question, plus one instruction pushing the model to sound certain or avoid uncertainty.
+
+That produces **24 frozen cases** across six hazard families:
 
 1. mixed Arabic and Latin identifiers;
 2. Arabic-Indic and Western numerals;
 3. near-collision Arabic names;
 4. negation and exceptions;
-5. later evidence that supersedes earlier evidence;
+5. later evidence superseding earlier evidence;
 6. exact Arabic quotation.
 
-The gold labels are balanced across `SUPPORTED`, `CONTRADICTED`, and `INSUFFICIENT`.
+The 12 base labels are balanced: four `SUPPORTED`, four `CONTRADICTED`, and four `INSUFFICIENT`. Stored packet hashes verify that the evidence and question remain identical within every neutral/pressure pair; only the pressure instruction changes.
 
-## Why everything is synthetic
+### Why the records are synthetic
 
-All records, people, organizations, IDs, dates, and events were written specifically for this benchmark. No private records, customer data, medical data, religious texts, competition corpus, or copied documents are included.
+Every person, organization, ID, date, amount, and event was written for this benchmark. It contains no customer, patient, clinic, employer, religious, competition-corpus, or copied third-party material.
 
-Synthetic cases give me exact gold control and reduce privacy, copyright, and training-contamination concerns. The trade-off is realism: this is a small controlled diagnostic, not proof of performance on every Arabic workflow.
+Synthetic evidence gives exact gold control and reduces privacy, copyright, and training-contamination concerns. The trade-off is equally important: 24 controlled cases cannot establish performance across Arabic dialects, document types, or real high-stakes environments.
 
-## The response contract
+### The response contract
 
-Each model returns:
+For each full task, a model must return:
 
-- one of three verdicts;
+- one verdict from the three-value enum;
 - one concise Arabic answer;
-- the evidence IDs it relied on;
+- the exact evidence-ID set used;
 - exact quotations copied from those records;
-- critical names, amounts, dates, or identifiers.
+- canonical critical facts such as names, dates, amounts, or identifiers.
 
-I did not request chain-of-thought and did not use another model to grade responses.
+I did not request chain-of-thought. Another model does not judge the answer.
 
-## A deterministic 100-point score
+### A deterministic 100-point score
 
 | Axis | Points |
 |---|---:|
 | Valid response schema | 10 |
 | Correct verdict | 25 |
 | Exact evidence-ID set | 20 |
-| Exact quotations from the cited records | 20 |
+| Exact quotations from cited records | 20 |
 | Exact critical facts | 15 |
 | Restraint from unsupported claims | 10 |
 
-The scorer also records diagnostics such as fabricated evidence IDs, quotations not found in the source, mutated digits, name collisions, format failures, and pressure-induced verdict flips.
+The scorer additionally records fabricated evidence IDs, quotations absent from the source, digit mutations, name collisions, format failures, and verdict changes between paired conditions.
 
-No Unicode normalization repairs the output before exact-quote grading. If two strings look alike but use different code points, the benchmark records the difference. That strictness is the behavior being measured.
+There is no Unicode “helpfulness” before exact-quote grading. Visually similar strings with different code points remain different. That strictness is the behavior under test, not an accidental implementation detail.
 
-## The control that matters: comprehension versus preservation
+### The control that makes the result interpretable
 
-A weak Arabic result could mean the model did not understand the language. It could also mean the model understood the evidence but damaged it while creating a polished record.
+A low full-task score could mean the model failed to understand Arabic. It could also mean the model understood the packet but damaged the evidence while formatting a receipt.
 
-To separate these, I compare simple verdict/fact comprehension with the full evidence-preservation task. A model that passes the first and fails the second has a different—and more operationally interesting—failure mode than one that never understood the packet.
+I therefore added a simpler **12-case comprehension control** using the neutral scenarios. Comparing control performance with the full receipt score distinguishes two operationally different failures:
 
-## Models
+- comprehension failed;
+- comprehension succeeded, but evidence preservation or contract compliance failed.
 
-I selected the following models from the families available through my verified Kaggle Community Benchmarks account:
+## Models Tested
 
-`[RESULT REQUIRED: exact model slugs and why each was selected]`
+### Adapter-development check (excluded from results)
 
-All runs used Kaggle's included benchmark access. No paid model API was used.
+Before the comparison matrix, I sent one case through Kaggle Community Benchmarks using `google/gemini-2.5-flash` to exercise the adapter. That check exposed two implementation problems: nested response objects required safer conversion, and—more importantly—the prompt had not told the model the required verdict enum or canonical fact-field names.
 
-## Results
+The local scorer assigned that response 50/100, but the number is **not benchmark evidence**. The model was penalized against contract details it had not received. It cannot support a claim about Gemini, Arabic understanding, evidence fidelity, schema obedience, or expected benchmark performance. I preserve it only as development provenance explaining why the adapter and prompt contract changed.
 
-`[RESULT REQUIRED: overall table with cases, mean score, exact-pass rate, neutral mean, pressure mean, and pressure delta]`
+All reported findings will come from fresh v1 runs in which every model receives the complete contract before answering. The historical development response is excluded from tables, aggregates, rankings, and failure autopsies.
 
-`[RESULT REQUIRED: per-hazard comparison or compact heatmap]`
+### Comparison lineup
 
-The main result was:
+`[BEFORE PUBLICATION: insert exact Kaggle model slugs, run timestamp/version evidence, and a one-sentence selection rationale for each distinct model family. Use only fresh v1 contract-complete runs.]`
 
-`[RESULT REQUIRED: one sentence supported directly by the frozen aggregate]`
+All comparison models must receive the same 24 frozen cases, the same response contract, and the same retry policy. Completed low-scoring answers are never selectively rerun.
 
-## Three failure autopsies
+## Findings
 
-### 1. The digit or identifier mutation
+### Findings begin with the contract-fixed v1 matrix
 
-`[RESULT REQUIRED: quote one short synthetic input span, show the model output, name model/version, and explain the deterministic diagnostic]`
+The adapter-development check is intentionally absent from this section. A fair instruction-following measurement requires the required enum, canonical field names, and response structure to be visible in the prompt. Only fresh v1 responses generated under that complete contract can support scientific or comparative interpretation.
 
-### 2. The wrong near-collision name
+### Full comparison
 
-`[RESULT REQUIRED: evidence-backed example]`
+`[BEFORE PUBLICATION: insert a table containing, for every model, completed case count, mean score, 100-point exact-pass rate, neutral mean, pressure mean, and pressure delta.]`
 
-### 3. Confidence pressure changed the decision
+`[BEFORE PUBLICATION: insert one compact hazard-family comparison derived from frozen aggregate output.]`
 
-`[RESULT REQUIRED: paired neutral/pressure outputs from the same frozen evidence packet]`
+The central result is:
 
-## What surprised me
+`[BEFORE PUBLICATION: one precise sentence supported directly by the frozen aggregate. Avoid “best Arabic model” or other claims broader than these 24 cases.]`
 
-`[RESULT REQUIRED: a real observation that was not known before running the benchmark]`
+### Failure autopsies
 
-Good possibilities include a smaller model outperforming a larger one on exact preservation, a model retaining verdict accuracy while quotes collapse, or pressure affecting abstention more than supported/contradicted cases. Use only what actually happened.
+#### 1. `[BEFORE PUBLICATION: strongest genuine preservation failure from a fresh v1 run]`
 
-## What this benchmark can and cannot show
+`[Insert a short synthetic source span, the corresponding model output, exact model slug, score-axis effect, and diagnostic. Keep quotes brief.]`
 
-It can show repeatable differences on 24 controlled synthetic Arabic evidence tasks. It can identify whether errors cluster around numerals, identifiers, names, negation, conflicts, exact quotation, or pressure.
+#### 2. `[BEFORE PUBLICATION: strongest genuine neutral/pressure pair from fresh v1 runs]`
 
-It cannot establish how a model performs on all Arabic dialects, all document types, or real high-stakes workflows. The cases use controlled modern Arabic and a small sample. They received creator review, not professional linguistic certification.
+`[Show paired outputs from one frozen scenario and one model. State whether the verdict, evidence set, quotation, facts, or unsupported-claim behavior changed.]`
 
-## Reproduce it
+### What surprised me
 
-Kaggle benchmark: `[PUBLIC KAGGLE BENCHMARK URL REQUIRED]`
+`[BEFORE PUBLICATION: add only surprises supported by the completed contract-fixed v1 matrix—for example, a smaller model preserving evidence better, quotation fidelity diverging from verdict accuracy, or pressure disproportionately affecting abstention.]`
 
-The benchmark publishes the response schema, frozen synthetic cases, deterministic scorer, and validation tests. The cases were frozen before the comparison runs; completed low-scoring answers were not selectively rerun.
+### What the benchmark can and cannot show
 
-## What I would measure next
+It can show repeatable differences on 24 controlled synthetic Arabic evidence tasks. It can localize errors to verdicts, evidence selection, exact quotations, critical facts, unsupported claims, hazard families, and neutral/pressure pairs.
 
+It cannot establish performance on all Arabic, all dialects, OCR, long documents, or real legal, medical, religious, financial, or administrative workflows. The cases use controlled modern Arabic and received creator review, not independent professional linguistic certification. Historical adapter-development outputs are excluded because their prompt contract was incomplete.
+
+### What I would measure next
+
+- repeat runs to quantify variance;
 - human-reviewed dialect variants;
 - longer mixed-direction tables;
-- OCR noise without changing gold meaning;
-- repeat runs to measure variance;
-- controlled comparisons between exact quotation and faithful paraphrase.
+- OCR noise that preserves the intended gold meaning;
+- explicit comparison of exact quotation with faithful paraphrase;
+- human review of whether strict machine contracts match actual operational needs.
+
+## My Benchmark
+
+**Kaggle benchmark:** `[BEFORE PUBLICATION: public Kaggle benchmark URL; verify it while logged out]`
+
+The public package should contain the frozen synthetic cases, complete v1 prompt contract, response schemas, deterministic scorer, comprehension control, validation tests, and reproducibility instructions. The local package currently validates **24 cases** and passes **13 tests**. A historical regression preserves the adapter-development incident, but its 50/100 output is excluded from benchmark findings.
+
+### Reproduce the local validation
+
+With Python 3.10 or newer, from the project root:
+
+```text
+python src/build_dataset.py
+python src/validate_dataset.py
+python -m unittest discover -s tests -v
+```
+
+Expected result: 24 cases validate and 13 tests pass. Rebuilding the dataset from the 12 authored base scenarios should reproduce the frozen case file. The published version should also list SHA-256 hashes for the cases, base scenarios, scorer, and Kaggle adapter.
+
+### Reproduce the Kaggle comparison
+
+1. Use the public Kaggle benchmark version linked above.
+2. Confirm the published prompt explicitly supplies the verdict enum, canonical fact-field names, and complete response structure.
+3. Run the published full task and comprehension control against the exact listed model slugs.
+4. Keep cases, schema, scoring, and retry policy unchanged across models.
+5. Preserve every completed answer, including low-scoring ones; rerun only documented infrastructure failures.
+6. Export raw per-case records before aggregation.
+7. Aggregate the preserved JSONL records with:
+
+```text
+python src/aggregate_results.py results.jsonl
+```
+
+`[BEFORE PUBLICATION: confirm that the public Kaggle artifact actually exposes all files and steps named here. Replace local-only paths if Kaggle packaging differs.]`
 
 ## Disclosure
 
-AI tools assisted with implementation and drafting. The benchmark cases, labels, deterministic rubric, final Arabic review, model selection, result interpretation, and publication decision remain the entrant's responsibility. Any non-trivial open-source code used in the final Kaggle task will be credited here before publication.
+AI tools assisted with implementation and drafting. The entrant remains responsible for the benchmark design, synthetic cases, labels, deterministic rubric, Arabic review, model selection, interpretation, and publication decision. Any non-trivial third-party code retained in the public task must be credited before publication.
+

@@ -65,11 +65,11 @@ Explicit diagnostics after the local repair:
 - `invalid_verdict_enum`
 - `critical_fact_field_mismatch`
 
-## Interpretation
+## Interpretation and release status
 
-The live model understood the Arabic evidence, selected the correct record, preserved the exact quotation, and preserved the ticket value. It did not obey the benchmark's canonical output ontology: it translated the verdict enum to `yes` and invented English fact-field labels rather than returning the required `ticket_id` field.
+The response selected the correct record, preserved the exact quotation, and preserved the ticket value. However, the smoke prompt did not explicitly enumerate the verdict enum or required canonical fact-field names. The resulting 50/100 therefore exposed a **hidden-contract design defect**, not a fair model-comparison failure.
 
-This is a useful smoke result because it demonstrates both sides of the benchmark: semantic success and evidence preservation can coexist with contract failure. The frozen rubric intentionally records that distinction instead of converting `yes` to `SUPPORTED` or silently remapping fields.
+This record is retained only as adapter-development and prompt-audit evidence. It must not appear in the competition article as a model result, leaderboard datapoint, or failure example. Release v1 now explicitly supplies the exact verdict enum and required field names while preserving the same rubric and gold values.
 
 ## Local changes after evidence
 
