@@ -1,8 +1,9 @@
 ---
 title: "RTL Receipt Test: Fluent Arabic is not the same as faithful evidence"
-published: false
+published: true
 description: "Five models, 24 synthetic Arabic evidence cases, and a deterministic test of exact preservation under mixed-direction text and confidence pressure."
 tags: devchallenge,kagglechallenge,ai,machinelearning
+canonical_url: "https://dev.to/redwan_rahman_57319981dd0/rtl-receipt-test-fluent-arabic-is-not-the-same-as-faithful-evidence-2m1j"
 ---
 
 ![RTL Receipt Test benchmark cover](https://raw.githubusercontent.com/redwanrahman-cloud/rtl-receipt-test/main/assets/rtl-receipt-test-dev-cover.png)

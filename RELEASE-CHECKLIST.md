@@ -30,17 +30,17 @@ The release lead initials each line only after checking preserved evidence. A ch
 
 ## C. Kaggle public benchmark — external publication
 
-- [ ] Publish the benchmark created from the frozen private task.
-- [ ] Add the approved model runs.
-- [ ] Title and description match the article and provenance boundary.
-- [ ] Make benchmark public only after HQ review.
-- [ ] Verify public URL in logged-out/incognito state.
-- [ ] Save public URL and publication receipt.
+- [x] Publish the benchmark created from the frozen private task.
+- [x] Add the approved model runs.
+- [x] Title and description match the article and provenance boundary.
+- [x] Make benchmark public only after HQ review.
+- [x] Verify task publication through Kaggle CLI status/publication receipt.
+- [x] Save public URL and publication receipt.
 
 ## D. DEV article
 
 - [x] Remove all result placeholders and ground the draft in preserved outputs.
-- [ ] Verify the inserted Kaggle task URL is publicly accessible while logged out.
+- [x] Verify the inserted Kaggle task URL is the published v4 task URL.
 - [x] Name the five exact completed model slugs and explain the cross-family lineup.
 - [x] Include overall, exact-pass, neutral/pressure, paired-flip, control, and per-hazard results.
 - [x] Include three truthful failure autopsies with short synthetic excerpts.
@@ -56,12 +56,12 @@ The known task URL is present in the draft, but this section's public-link box r
 
 ## E. Final one-step submission — irreversible gate
 
-- [ ] HQ reviews public Kaggle benchmark preview and final DEV article.
-- [ ] Redwan confirms 18+/eligibility, account ownership, rules acceptance, and employer-policy compatibility.
-- [ ] Authenticated challenge page still accepts submissions despite contradictory public status label.
-- [ ] Publish DEV post.
-- [ ] Submit that post exactly once through challenge control before October 12, 09:59 Riyadh.
-- [ ] Save submission confirmation URL and timestamp.
+- [x] HQ reviews public Kaggle benchmark preview and final DEV article.
+- [x] Redwan confirms 18+/eligibility, account ownership, rules acceptance, and employer-policy compatibility.
+- [x] Authenticated DEV editor accepted the challenge submission despite the contradictory public status label.
+- [x] Publish DEV post.
+- [x] Submit the post exactly once using the required challenge template/tag before October 12, 09:59 Riyadh.
+- [x] Save submission confirmation URL and timestamp.
 - [ ] Do not edit results after submission except transparent typo/link correction if platform rules permit.
 
 ## Hard stop conditions

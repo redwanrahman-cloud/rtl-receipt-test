@@ -33,10 +33,10 @@ The 100-point scorer keeps those dimensions visible. It does not use an LLM judg
 - `deepseek-ai/deepseek-r1-0528` failed whole-run structured-output parsing before a complete artifact existed. It is excluded from numeric ranking and is not scored as zero.
 - One private adapter-development check ran on `google/gemini-2.5-flash`. Its prompt omitted the required verdict enum and canonical fact-field names, so its historical 50/100 local score is **invalid as benchmark or model-performance evidence**.
 - That check is preserved only as development provenance for the nested-response adapter repair and the requirement to expose the complete scoring contract.
-- Kaggle and DEV accounts were verified. Private execution is complete, but no benchmark or article has been published or submitted.
+- Kaggle task v4, the backing notebook, the GitHub repository, and the DEV challenge article were published on 7 October 2026.
 - Kaggle's included benchmark quota funded the runs; no external API credit was added. The preserved completed-model total shown by Kaggle was approximately USD 0.197 in included usage, not an out-of-pocket charge.
 
-Scientifically interpretable results now exist for the five completed release-v1 runs on this frozen sample. A valid challenge entry still requires making the Kaggle task public, verifying logged-out access, publishing the English DEV article, and submitting it once through the challenge control.
+Scientifically interpretable results exist for the five completed release-v1 runs on this frozen sample. The public challenge entry is [available on DEV](https://dev.to/redwan_rahman_57319981dd0/rtl-receipt-test-fluent-arabic-is-not-the-same-as-faithful-evidence-2m1j), with the required challenge tag and public Kaggle benchmark link.
 
 ## Repository map
 
