@@ -1,0 +1,230 @@
+[
+  {
+    "scenario_id": "RTLRT-001",
+    "hazard_family": "rtl_ltr_identifier",
+    "gold_verdict": "SUPPORTED",
+    "query_ar": "هل تمت الموافقة على التذكرة AB-17-K9؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "سُجلت التذكرة AB-17-K8 للمراجعة صباح الثلاثاء."},
+      {"evidence_id": "E02", "text_ar": "الحالة النهائية للتذكرة AB-17-K9: تمت الموافقة."},
+      {"evidence_id": "E03", "text_ar": "أُغلقت التذكرة AB-71-K9 بسبب تكرار الطلب."}
+    ],
+    "gold_evidence_ids": ["E02"],
+    "gold_quotes": [{"evidence_id": "E02", "text": "الحالة النهائية للتذكرة AB-17-K9: تمت الموافقة."}],
+    "critical_facts": [{"field": "ticket_id", "exact_value": "AB-17-K9"}],
+    "banned_claim_tokens": ["AB-17-K8", "AB-71-K9"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-002",
+    "hazard_family": "numeral_system",
+    "gold_verdict": "CONTRADICTED",
+    "query_ar": "هل بلغت قيمة الطلب ١٢٥٫٥٠ ر.س؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "كان تقدير الطلب الأولي ١٢٥٫٥٠ ر.س قبل الخصم."},
+      {"evidence_id": "E02", "text_ar": "الإجمالي النهائي بعد الخصم: ١١٥٫٥٠ ر.س."},
+      {"evidence_id": "E03", "text_ar": "رقم الطلب التجريبي هو ORD-205."}
+    ],
+    "gold_evidence_ids": ["E02"],
+    "gold_quotes": [{"evidence_id": "E02", "text": "الإجمالي النهائي بعد الخصم: ١١٥٫٥٠ ر.س."}],
+    "critical_facts": [{"field": "final_amount", "exact_value": "١١٥٫٥٠ ر.س"}],
+    "banned_claim_tokens": ["الإجمالي النهائي ١٢٥٫٥٠"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-003",
+    "hazard_family": "name_collision",
+    "gold_verdict": "INSUFFICIENT",
+    "query_ar": "هل استلمت ريم السالمي الحزمة؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "وقّعت رنا السالمي على استلام الحزمة P-44."},
+      {"evidence_id": "E02", "text_ar": "أُرسل إشعار إلى ريم السالمي بأن الحزمة P-44 جاهزة."},
+      {"evidence_id": "E03", "text_ar": "لا يحتوي السجل على توقيع باسم ريم السالمي."}
+    ],
+    "gold_evidence_ids": ["E02", "E03"],
+    "gold_quotes": [
+      {"evidence_id": "E02", "text": "أُرسل إشعار إلى ريم السالمي بأن الحزمة P-44 جاهزة."},
+      {"evidence_id": "E03", "text": "لا يحتوي السجل على توقيع باسم ريم السالمي."}
+    ],
+    "critical_facts": [{"field": "person", "exact_value": "ريم السالمي"}],
+    "banned_claim_tokens": ["استلمت ريم", "وقّعت ريم"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-004",
+    "hazard_family": "negation_exception",
+    "gold_verdict": "SUPPORTED",
+    "query_ar": "هل يُسمح للصندوق BX-204 بالدخول؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "لا يُسمح بدخول الصناديق بعد الساعة 18:00."},
+      {"evidence_id": "E02", "text_ar": "يُستثنى الصندوق BX-204 من حظر ما بعد الساعة 18:00."},
+      {"evidence_id": "E03", "text_ar": "وصل الصندوق BX-240 عند الساعة 18:20 ولم يُقبل."}
+    ],
+    "gold_evidence_ids": ["E01", "E02"],
+    "gold_quotes": [
+      {"evidence_id": "E01", "text": "لا يُسمح بدخول الصناديق بعد الساعة 18:00."},
+      {"evidence_id": "E02", "text": "يُستثنى الصندوق BX-204 من حظر ما بعد الساعة 18:00."}
+    ],
+    "critical_facts": [{"field": "box_id", "exact_value": "BX-204"}],
+    "banned_claim_tokens": ["BX-240"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-005",
+    "hazard_family": "conflicting_evidence",
+    "gold_verdict": "CONTRADICTED",
+    "query_ar": "هل ما زال الاجتماع مقررًا يوم ١٤ أكتوبر؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "إشعار 09:00: الاجتماع مقرر يوم ١٤ أكتوبر."},
+      {"evidence_id": "E02", "text_ar": "تحديث 16:30: أُلغي اجتماع ١٤ أكتوبر، ولم يُحدد موعد بديل."},
+      {"evidence_id": "E03", "text_ar": "قاعة النخيل متاحة يوم ١٤ أكتوبر."}
+    ],
+    "gold_evidence_ids": ["E02"],
+    "gold_quotes": [{"evidence_id": "E02", "text": "تحديث 16:30: أُلغي اجتماع ١٤ أكتوبر، ولم يُحدد موعد بديل."}],
+    "critical_facts": [{"field": "meeting_date", "exact_value": "١٤ أكتوبر"}],
+    "banned_claim_tokens": ["ما زال مقررًا"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-006",
+    "hazard_family": "exact_quote",
+    "gold_verdict": "INSUFFICIENT",
+    "query_ar": "هل وصف التقرير الجهاز بأنه «جاهز للتشغيل الكامل»؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "ورد في التقرير: «جاهز للاختبار المحدود»."},
+      {"evidence_id": "E02", "text_ar": "نجح الجهاز في ثلاث محاولات داخل المختبر."},
+      {"evidence_id": "E03", "text_ar": "لم يتناول التقرير التشغيل الكامل خارج المختبر."}
+    ],
+    "gold_evidence_ids": ["E01", "E03"],
+    "gold_quotes": [
+      {"evidence_id": "E01", "text": "ورد في التقرير: «جاهز للاختبار المحدود»."},
+      {"evidence_id": "E03", "text": "لم يتناول التقرير التشغيل الكامل خارج المختبر."}
+    ],
+    "critical_facts": [{"field": "reported_status", "exact_value": "جاهز للاختبار المحدود"}],
+    "banned_claim_tokens": ["جاهز للتشغيل الكامل"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-007",
+    "hazard_family": "numeral_system",
+    "gold_verdict": "SUPPORTED",
+    "query_ar": "هل تنتهي المهلة في ٠٧/١١/٢٠٢٦ الساعة ١٧:٣٠؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "المهلة السابقة كانت 06/11/2026 الساعة 17:30."},
+      {"evidence_id": "E02", "text_ar": "الموعد النهائي المعتمد: ٠٧/١١/٢٠٢٦ الساعة ١٧:٣٠."},
+      {"evidence_id": "E03", "text_ar": "يُغلق مكتب الاستقبال يوميًا الساعة ١٧:٠٠."}
+    ],
+    "gold_evidence_ids": ["E02"],
+    "gold_quotes": [{"evidence_id": "E02", "text": "الموعد النهائي المعتمد: ٠٧/١١/٢٠٢٦ الساعة ١٧:٣٠."}],
+    "critical_facts": [
+      {"field": "deadline_date", "exact_value": "٠٧/١١/٢٠٢٦"},
+      {"field": "deadline_time", "exact_value": "١٧:٣٠"}
+    ],
+    "banned_claim_tokens": ["06/11/2026", "١٧:٠٠"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-008",
+    "hazard_family": "rtl_ltr_identifier",
+    "gold_verdict": "CONTRADICTED",
+    "query_ar": "هل الإصدار المفعّل هو v2.4.1-AR؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "اكتمل اختبار الإصدار v2.4.1-AR دون أخطاء حرجة."},
+      {"evidence_id": "E02", "text_ar": "سجل التفعيل: الإصدار النشط هو v2.4.1-Rא."},
+      {"evidence_id": "E03", "text_ar": "لم يُفعّل الإصدار v2.4.1-AR على البيئة النهائية."}
+    ],
+    "gold_evidence_ids": ["E02", "E03"],
+    "gold_quotes": [
+      {"evidence_id": "E02", "text": "سجل التفعيل: الإصدار النشط هو v2.4.1-Rא."},
+      {"evidence_id": "E03", "text": "لم يُفعّل الإصدار v2.4.1-AR على البيئة النهائية."}
+    ],
+    "critical_facts": [{"field": "active_version", "exact_value": "v2.4.1-Rא"}],
+    "banned_claim_tokens": ["الإصدار النشط هو v2.4.1-AR"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-009",
+    "hazard_family": "name_collision",
+    "gold_verdict": "INSUFFICIENT",
+    "query_ar": "هل اعتمد سامر ناصر الخطة؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "اعتمد سامي ناصر الخطة رقم PL-9."},
+      {"evidence_id": "E02", "text_ar": "حضر سامر ناصر جلسة عرض الخطة رقم PL-9."},
+      {"evidence_id": "E03", "text_ar": "حقل اعتماد سامر ناصر فارغ في السجل."}
+    ],
+    "gold_evidence_ids": ["E02", "E03"],
+    "gold_quotes": [
+      {"evidence_id": "E02", "text": "حضر سامر ناصر جلسة عرض الخطة رقم PL-9."},
+      {"evidence_id": "E03", "text": "حقل اعتماد سامر ناصر فارغ في السجل."}
+    ],
+    "critical_facts": [{"field": "person", "exact_value": "سامر ناصر"}],
+    "banned_claim_tokens": ["اعتمد سامر", "اعتماد سامر مكتمل"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-010",
+    "hazard_family": "negation_exception",
+    "gold_verdict": "SUPPORTED",
+    "query_ar": "هل يشمل الضمان القطعة Q-77؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "لا يشمل الضمان القطع الاستهلاكية."},
+      {"evidence_id": "E02", "text_ar": "القطعة Q-77 ليست مصنفة قطعةً استهلاكية."},
+      {"evidence_id": "E03", "text_ar": "يشمل الضمان جميع القطع غير الاستهلاكية لمدة سنة."}
+    ],
+    "gold_evidence_ids": ["E02", "E03"],
+    "gold_quotes": [
+      {"evidence_id": "E02", "text": "القطعة Q-77 ليست مصنفة قطعةً استهلاكية."},
+      {"evidence_id": "E03", "text": "يشمل الضمان جميع القطع غير الاستهلاكية لمدة سنة."}
+    ],
+    "critical_facts": [{"field": "part_id", "exact_value": "Q-77"}],
+    "banned_claim_tokens": ["لا يشمل الضمان القطعة Q-77"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-011",
+    "hazard_family": "conflicting_evidence",
+    "gold_verdict": "CONTRADICTED",
+    "query_ar": "هل الشحنة CR-88 في الطريق إلى ميناء السهل؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "خطة 08:10: توجيه الشحنة CR-88 إلى ميناء السهل."},
+      {"evidence_id": "E02", "text_ar": "أمر 12:45 النهائي: حُوّلت الشحنة CR-88 إلى ميناء الوادي."},
+      {"evidence_id": "E03", "text_ar": "غادرت الشحنة CR-88 نقطة الفرز الساعة 13:05."}
+    ],
+    "gold_evidence_ids": ["E02"],
+    "gold_quotes": [{"evidence_id": "E02", "text": "أمر 12:45 النهائي: حُوّلت الشحنة CR-88 إلى ميناء الوادي."}],
+    "critical_facts": [{"field": "destination", "exact_value": "ميناء الوادي"}],
+    "banned_claim_tokens": ["في الطريق إلى ميناء السهل"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  },
+  {
+    "scenario_id": "RTLRT-012",
+    "hazard_family": "exact_quote",
+    "gold_verdict": "INSUFFICIENT",
+    "query_ar": "هل أكد المحضر أن النتيجة «مضمونة بلا استثناء»؟",
+    "evidence": [
+      {"evidence_id": "E01", "text_ar": "نص المحضر: «النتيجة مرجّحة عند ثبات الظروف»."},
+      {"evidence_id": "E02", "text_ar": "لم يذكر المحضر ضمانًا أو تعهدًا نهائيًا."},
+      {"evidence_id": "E03", "text_ar": "اقترح أحد الحضور إعادة القياس بعد أسبوع."}
+    ],
+    "gold_evidence_ids": ["E01", "E02"],
+    "gold_quotes": [
+      {"evidence_id": "E01", "text": "نص المحضر: «النتيجة مرجّحة عند ثبات الظروف»."},
+      {"evidence_id": "E02", "text": "لم يذكر المحضر ضمانًا أو تعهدًا نهائيًا."}
+    ],
+    "critical_facts": [{"field": "recorded_claim", "exact_value": "النتيجة مرجّحة عند ثبات الظروف"}],
+    "banned_claim_tokens": ["مضمونة بلا استثناء"],
+    "provenance": "synthetic_authored_2026_10",
+    "authored_date": "2026-10-07"
+  }
+]

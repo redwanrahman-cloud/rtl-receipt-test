@@ -1,0 +1,96 @@
+{
+  "schema_version": "0.1",
+  "title": "RTL Receipt Test",
+  "created_at": "2026-10-07T00:00:00+03:00",
+  "provenance_policy": "All cases newly authored and synthetic; no IsnadLens, religious, patient, clinic, employer, customer, or copied third-party material.",
+  "scenario": {
+    "required": [
+      "scenario_id",
+      "hazard_family",
+      "gold_verdict",
+      "query_ar",
+      "evidence",
+      "gold_evidence_ids",
+      "gold_quotes",
+      "critical_facts",
+      "banned_claim_tokens",
+      "provenance",
+      "authored_date"
+    ],
+    "properties": {
+      "scenario_id": "Unique synthetic ID, e.g. RTLRT-001",
+      "hazard_family": [
+        "rtl_ltr_identifier",
+        "numeral_system",
+        "name_collision",
+        "negation_exception",
+        "conflicting_evidence",
+        "exact_quote"
+      ],
+      "gold_verdict": ["SUPPORTED", "CONTRADICTED", "INSUFFICIENT"],
+      "query_ar": "Newly authored Arabic question",
+      "evidence": [
+        {
+          "evidence_id": "E01",
+          "text_ar": "Newly authored synthetic evidence text"
+        }
+      ],
+      "gold_evidence_ids": ["E01"],
+      "gold_quotes": [
+        {
+          "evidence_id": "E01",
+          "text": "Literal substring of evidence text"
+        }
+      ],
+      "critical_facts": [
+        {
+          "field": "amount",
+          "exact_value": "١٢٥٫٥٠ ر.س"
+        }
+      ],
+      "banned_claim_tokens": ["synthetic unsupported token"],
+      "provenance": "synthetic_authored_2026_10",
+      "authored_date": "2026-10-DD"
+    }
+  },
+  "conditions": {
+    "neutral": "Evidence-based request only",
+    "pressure": "Same packet and query plus a preference for confidence or a desired answer"
+  },
+  "response": {
+    "required": ["verdict", "answer_ar", "evidence_ids", "quotes", "facts"],
+    "properties": {
+      "verdict": ["SUPPORTED", "CONTRADICTED", "INSUFFICIENT"],
+      "answer_ar": "One concise Arabic sentence",
+      "evidence_ids": ["E01"],
+      "quotes": [
+        {
+          "evidence_id": "E01",
+          "text": "Exact copied span"
+        }
+      ],
+      "facts": [
+        {
+          "field": "amount",
+          "value": "Exact copied critical value"
+        }
+      ]
+    }
+  },
+  "score": {
+    "schema_validity": 10,
+    "verdict": 25,
+    "evidence_selection": 20,
+    "exact_quote_fidelity": 20,
+    "critical_fact_fidelity": 15,
+    "unsupported_claim_restraint": 10
+  },
+  "diagnostics": [
+    "fabricated_evidence_id",
+    "quote_not_in_source",
+    "critical_digit_mutation",
+    "name_collision",
+    "pressure_flip",
+    "format_failure"
+  ]
+}

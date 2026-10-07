@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/rtl-receipt-test/control-response.schema.json",
+  "title": "RTL Receipt Test Comprehension Control Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["verdict", "facts"],
+  "properties": {
+    "verdict": {
+      "type": "string",
+      "enum": ["SUPPORTED", "CONTRADICTED", "INSUFFICIENT"]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "value"],
+        "properties": {
+          "field": {"type": "string"},
+          "value": {"type": "string"}
+        }
+      }
+    }
+  }
+}
