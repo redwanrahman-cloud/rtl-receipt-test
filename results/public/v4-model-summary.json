@@ -1,0 +1,119 @@
+[
+  {
+    "model": "openai/gpt-5.4-mini-2026-03-17",
+    "status": "completed",
+    "full_cases": 24,
+    "controls": 12,
+    "kaggle_score": 71.4583333333,
+    "local_score": 71.4583333333,
+    "exact_passes": 10,
+    "exact_pass_rate": 0.416667,
+    "neutral_mean": 78.3333,
+    "pressure_mean": 64.5833,
+    "pressure_delta": -13.75,
+    "pressure_flips": 2,
+    "control_mean": 87.5,
+    "schema_format_failures": 0,
+    "diagnostics": {
+      "name_collision": 2,
+      "pressure_flip": 2
+    },
+    "input_tokens": 15324,
+    "output_tokens": 3334,
+    "cost_usd": 0.026496
+  },
+  {
+    "model": "google/gemini-3.7-flash",
+    "status": "completed",
+    "full_cases": 24,
+    "controls": 12,
+    "kaggle_score": 68.75,
+    "local_score": 68.75,
+    "exact_passes": 9,
+    "exact_pass_rate": 0.375,
+    "neutral_mean": 68.75,
+    "pressure_mean": 68.75,
+    "pressure_delta": 0.0,
+    "pressure_flips": 1,
+    "control_mean": 79.1667,
+    "schema_format_failures": 0,
+    "diagnostics": {
+      "critical_digit_mutation": 2,
+      "name_collision": 1,
+      "pressure_flip": 1
+    },
+    "input_tokens": 15747,
+    "output_tokens": 21296,
+    "cost_usd": 0.09167025
+  },
+  {
+    "model": "google/gemma-4-31b",
+    "status": "completed",
+    "full_cases": 24,
+    "controls": 12,
+    "kaggle_score": 63.75,
+    "local_score": 63.75,
+    "exact_passes": 10,
+    "exact_pass_rate": 0.416667,
+    "neutral_mean": 64.1667,
+    "pressure_mean": 63.3333,
+    "pressure_delta": -0.8333,
+    "pressure_flips": 0,
+    "control_mean": 75.0,
+    "schema_format_failures": 0,
+    "diagnostics": {
+      "name_collision": 4
+    },
+    "input_tokens": 15315,
+    "output_tokens": 21067,
+    "cost_usd": 0.01493745
+  },
+  {
+    "model": "qwen/qwen3-next-80b-a3b-instruct",
+    "status": "completed",
+    "full_cases": 24,
+    "controls": 12,
+    "kaggle_score": 60.0,
+    "local_score": 60.0,
+    "exact_passes": 4,
+    "exact_pass_rate": 0.166667,
+    "neutral_mean": 62.5,
+    "pressure_mean": 57.5,
+    "pressure_delta": -5.0,
+    "pressure_flips": 2,
+    "control_mean": 79.1667,
+    "schema_format_failures": 0,
+    "diagnostics": {
+      "critical_digit_mutation": 1,
+      "name_collision": 1,
+      "pressure_flip": 2
+    },
+    "input_tokens": 16224,
+    "output_tokens": 4142,
+    "cost_usd": 0.007404
+  },
+  {
+    "model": "anthropic/claude-haiku-4-5@20251001",
+    "status": "completed",
+    "full_cases": 24,
+    "controls": 12,
+    "kaggle_score": 58.75,
+    "local_score": 58.75,
+    "exact_passes": 2,
+    "exact_pass_rate": 0.083333,
+    "neutral_mean": 59.5833,
+    "pressure_mean": 57.9167,
+    "pressure_delta": -1.6667,
+    "pressure_flips": 1,
+    "control_mean": 75.0,
+    "schema_format_failures": 0,
+    "diagnostics": {
+      "critical_digit_mutation": 1,
+      "name_collision": 2,
+      "pressure_flip": 1
+    },
+    "input_tokens": 21072,
+    "output_tokens": 7085,
+    "cost_usd": 0.056497
+  }
+]

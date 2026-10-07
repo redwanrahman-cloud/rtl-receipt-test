@@ -9,6 +9,7 @@ venv/
 access_token
 kaggle.json
 results/private/
+results/gemini-2.5-flash-v3/
 .kaggle-cli/
 .jupyter-data/
 kaggle-upload/

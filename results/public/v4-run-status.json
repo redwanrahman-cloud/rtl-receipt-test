@@ -1,0 +1,33 @@
+[
+  {
+    "model": "openai/gpt-5.4-mini-2026-03-17",
+    "status": "completed_and_locally_verified",
+    "numeric_ranking_eligible": true
+  },
+  {
+    "model": "google/gemini-3.7-flash",
+    "status": "completed_and_locally_verified",
+    "numeric_ranking_eligible": true
+  },
+  {
+    "model": "google/gemma-4-31b",
+    "status": "completed_and_locally_verified",
+    "numeric_ranking_eligible": true
+  },
+  {
+    "model": "qwen/qwen3-next-80b-a3b-instruct",
+    "status": "completed_and_locally_verified",
+    "numeric_ranking_eligible": true
+  },
+  {
+    "model": "anthropic/claude-haiku-4-5@20251001",
+    "status": "completed_and_locally_verified",
+    "numeric_ranking_eligible": true
+  },
+  {
+    "model": "deepseek-ai/deepseek-r1-0528",
+    "status": "whole_run_structured_output_parsing_failure",
+    "numeric_ranking_eligible": false,
+    "note": "The run aborted before producing the required complete 36-record result artifact. It is disclosed as a compatibility failure and excluded from numeric ranking; it is not scored as zero."
+  }
+]

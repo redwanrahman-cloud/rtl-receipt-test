@@ -333,15 +333,8 @@ def rtl_receipt_test_v1(llm) -> float:
 #
 
 # %%
-RUN_AUTHORIZED = False
-MODEL_SLUG = "google/gemini-2.5-flash"
-if RUN_AUTHORIZED:
-    if MODEL_SLUG not in VISIBLE_MODELS:
-        raise ValueError(f"Model slug is not visible in this account: {MODEL_SLUG}")
-    task_run = rtl_receipt_test_v1.run(llm=kbench.llms[MODEL_SLUG])
-    print(task_run)
-else:
-    print("No model calls made. Set RUN_AUTHORIZED=True only for a deliberate private run.")
+task_run = rtl_receipt_test_v1.run(llm=kbench.llm)
+print(task_run)
 
 
 # %% [markdown]
