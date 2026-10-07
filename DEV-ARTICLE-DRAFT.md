@@ -5,7 +5,7 @@ description: "Five models, 24 synthetic Arabic evidence cases, and a determinist
 tags: devchallenge,kagglechallenge,ai,machinelearning
 ---
 
-> **Final draft, not published.** The Kaggle task exists at the URL below but has not yet been verified as publicly accessible. Do not publish this DEV article until the benchmark is made public and its URL works while logged out.
+![RTL Receipt Test benchmark cover](https://raw.githubusercontent.com/redwanrahman-cloud/rtl-receipt-test/main/assets/rtl-receipt-test-dev-cover.png)
 
 *This is a submission for the [Kaggle Benchmarking Challenge](https://dev.to/challenges/kaggle-2026-09-23).*
 
@@ -168,7 +168,7 @@ It cannot establish performance on all Arabic, dialects, OCR, long documents, or
 
 **Kaggle task:** [RTL Receipt Test v1, version 4](https://www.kaggle.com/benchmarks/tasks/redwanurrahmank/rtl-receipt-test-v1/4)
 
-At the time of this draft, that task URL has **not yet been verified as publicly accessible**. The article must remain unpublished until the task is made public and the link works while logged out.
+**Public reproducibility repository:** [redwanrahman-cloud/rtl-receipt-test](https://github.com/redwanrahman-cloud/rtl-receipt-test)
 
 The reproducibility package includes the 24 frozen cases, complete prompt contract, response schemas, deterministic scorer, 12 controls, validation tests, and public-safe aggregate tables. Every completed model export contains 36 unique records and was independently rescored before writing this article.
 
